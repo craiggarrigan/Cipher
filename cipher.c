@@ -20,15 +20,44 @@ char *encipher(const char *plaintext){
 		// Only substitute alphabetic chars
 		if(isalpha(plaintext[i])){
 			// Work out the correct character from the cipher to use
-			ciphertext[i] = cipher[tolower(plaintext[i]) - 'a'];
+			ciphertext[i] = lookupChar(plaintext[i]);
 		} else {
 			ciphertext[i] = plaintext[i];
 		}
 	}
 	
+	ciphertext[i] = '\0';
+	
 	return ciphertext;
 }
 
 char *decipher(const char *ciphertext){
-	return "DUMMY";
+	char *plaintext = malloc(strlen(ciphertext) + 1);
+	if(plaintext == NULL)
+		return NULL;
+	unsigned i;
+	for(i = 0; i < strlen(ciphertext); i++){
+		if(isalpha(ciphertext[i])){
+			plaintext[i] = reverseLookupChar(ciphertext[i]);
+		} else {
+			plaintext[i] = ciphertext[i];
+		}
+	}
+	
+	plaintext[i] = '\0';
+	
+	return plaintext;
+}
+
+char lookupChar(char c){
+	return cipher[tolower(c) - 'a'];
+}
+
+char reverseLookupChar(char c){
+	c = tolower(c);
+	unsigned i = 0;
+	while(cipher[i] != c){
+		i++;
+	}
+	return 'a' + i;
 }
