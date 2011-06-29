@@ -1,8 +1,11 @@
 #include "cipher.h"
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
 
 int main(int argc, char **argv){
-	printf("encipher('hello world') => %s\n", encipher("hello world'));
+	printf("encipher('hello world') => %s\n", encipher("hello world"));
 	printf("decipher(encipher('hello world')) => %s\n", decipher(encipher("hello world")));
 	return 0;
 }
@@ -12,7 +15,7 @@ char *encipher(const char *plaintext){
 	if(ciphertext == NULL)
 		return NULL;
 	// Apply cipher
-	int i;
+	unsigned i;
 	for(i = 0; i < strlen(plaintext); i++){
 		// Only substitute alphabetic chars
 		if(isalpha(plaintext[i])){
@@ -24,4 +27,8 @@ char *encipher(const char *plaintext){
 	}
 	
 	return ciphertext;
+}
+
+char *decipher(const char *ciphertext){
+	return "DUMMY";
 }
