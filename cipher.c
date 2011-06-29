@@ -5,8 +5,9 @@
 #include <ctype.h>
 
 int main(int argc, char **argv){
-	printf("encipher('hello world') => %s\n", encipher("hello world"));
-	printf("decipher(encipher('hello world')) => %s\n", decipher(encipher("hello world")));
+	if(argc != 2) return 0;
+	printf("encipher(%s) => %s\n", argv[1], encipher(argv[1]));
+	printf("decipher(%s) => %s\n", encipher(argv[1]), decipher(encipher(argv[1])));
 	return 0;
 }
 
