@@ -6,3 +6,22 @@ int main(int argc, char **argv){
 	printf("decipher(encipher('hello world')) => %s\n", decipher(encipher("hello world")));
 	return 0;
 }
+
+char *encipher(const char *plaintext){
+	char *ciphertext = malloc(strlen(plaintext) + 1);
+	if(ciphertext == NULL)
+		return NULL;
+	// Apply cipher
+	int i;
+	for(i = 0; i < strlen(plaintext); i++){
+		// Only substitute alphabetic chars
+		if(isalpha(plaintext[i])){
+			// Work out the correct character from the cipher to use
+			ciphertext[i] = cipher[tolower(plaintext[i]) - 'a'];
+		} else {
+			ciphertext[i] = plaintext[i];
+		}
+	}
+	
+	return ciphertext;
+}
